@@ -20,6 +20,13 @@ mod shapes {
                 Err("Radius not a positive number".to_string())
             }
         }
+
+        pub fn new_2_panic(radius: i32) -> Circle {
+            match radius {
+                ..=0 => panic!("Invalid radius"),
+                _ => Circle { radius },
+            }
+        }
     }
 }
 
@@ -52,4 +59,14 @@ mod tests {
         let circle1 = shapes::Circle::new_1(-1)?; // ? in the end returns error if execution encounters and error else control flow is passed to next line
         Ok(())
     }
+
+    #[test]
+    #[should_panic(expected = "Invalid radius")]
+    fn should_panic() {
+        let circle1 = shapes::Circle::new_2_panic(-1);
+    }
+
+    #[test]
+    #[ignore]
+    fn test_large_execution() {}
 }
